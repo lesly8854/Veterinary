@@ -1,0 +1,22 @@
+﻿CREATE TABLE [dbo].[Pet](
+	[PetID] [int] NOT NULL,
+	[OwnerID] [int] NULL,
+	[Name] [nvarchar](100) NOT NULL,
+	[Species] [nvarchar](100) NOT NULL,
+	[Breed] [nvarchar](100) NOT NULL,
+	[Gender] [nvarchar](10) NOT NULL,
+	[DateOfBirth] [date] NULL,
+	[Weight] [decimal](5, 2) NOT NULL,
+ CONSTRAINT [PK_Pet] PRIMARY KEY CLUSTERED 
+(
+	[PetID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Pet]  WITH CHECK ADD  CONSTRAINT [FK_Pet_PetOwner] FOREIGN KEY([OwnerID])
+REFERENCES [dbo].[PetOwner] ([OwnerID])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+
+ALTER TABLE [dbo].[Pet] CHECK CONSTRAINT [FK_Pet_PetOwner]

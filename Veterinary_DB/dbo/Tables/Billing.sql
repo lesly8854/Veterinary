@@ -16,6 +16,9 @@ GO
 
 ALTER TABLE [dbo].[Billing] CHECK CONSTRAINT [FK_Billing_Appointment]
 GO
+
+
+GO
 ALTER TABLE [dbo].[Billing]  WITH CHECK ADD  CONSTRAINT [FK_Billing_PetOwner] FOREIGN KEY([OwnerID])
 REFERENCES [dbo].[PetOwner] ([OwnerID])
 ON UPDATE CASCADE
@@ -23,3 +26,5 @@ ON DELETE CASCADE
 GO
 
 ALTER TABLE [dbo].[Billing] CHECK CONSTRAINT [FK_Billing_PetOwner]
+GO
+

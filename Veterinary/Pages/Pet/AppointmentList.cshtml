@@ -1,0 +1,49 @@
+﻿@page
+@model Veterinary.Pages.Pet.AppointmentListModel
+@{
+    ViewData["Title"] = "Appointments";
+}
+
+<div class="row mb-3">
+    <div class="col-8 text-start">
+        <h2>My Appointments 🐾</h2>
+    </div>
+    <div class="col-4 text-end">
+        <a asp-page="/Pet/AddAppointment" class="btn btn-success">
+            + Add Appointment
+        </a>
+    </div>
+</div>
+
+@if (Model.Appointments == null || !Model.Appointments.Any())
+{
+    <div class="alert alert-info">
+        You don't have any appointments yet. Click <strong>Add Appointment</strong> to book one!
+    </div>
+}
+else
+{
+    <div class="row row-cols-1 row-cols-md-2 g-3">
+        @foreach (var appt in Model.Appointments)
+        {
+            <div class="col">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">@appt.PetName</h5>
+                        <p class="card-text mb-1">
+                            <strong>Date:</strong> @appt.Date.ToString("g")
+                        </p>
+                        <p class="card-text mb-1">
+                            <strong>Reason:</strong> @appt.Reason
+                        </p>
+                        <p class="card-text">
+                            <strong>Status:</strong> @appt.Status
+                        </p>
+                        @* later you can add an EditAppointment page here *@
+                        @* <a asp-page="/Pet/EditAppointment" asp-route-id="@appt.AppointmentID" class="btn btn-sm btn-primary">Edit</a> *@
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

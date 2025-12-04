@@ -1,0 +1,43 @@
+﻿@page
+@model Veterinary.Pages.Pet.PetListModel
+@{
+    ViewData["Title"] = "Pets";
+}
+
+<div class="row text-center">
+    <div class="col-12">
+        <label class="form-label fs-1">Pet List</label>
+    </div>
+</div>
+
+<table class="table table-striped table-bordered mt-3">
+    <thead class="table-light">
+        <tr>
+            <th>Pet ID</th>
+            <th>Name</th>
+            <th>Species</th>
+            <th>Breed</th>
+            <th>Gender</th>
+            <th>Weight</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var pet in Model.Pets)
+        {
+            <tr>
+                <td>@pet.PetID</td>
+                <td>@pet.Name</td>
+                <td>@pet.Species</td>
+                <td>@pet.Breed</td>
+                <td>@pet.Gender</td>
+                <td>@pet.Weight</td>
+                <td>
+                    <a asp-page="/Pet/EditPet" asp-route-id="@pet.PetID" class="btn btn-sm btn-primary">Edit</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-page="/Pet/AddPet" class="btn btn-success">Add New Pet</a>

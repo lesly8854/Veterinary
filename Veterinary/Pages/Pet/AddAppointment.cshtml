@@ -1,0 +1,85 @@
+﻿@page
+@model Veterinary.Pages.Pet.AddAppointmentModel
+@{
+    ViewData["Title"] = "Add Appointment";
+}
+
+<div class="row text-center">
+    <div class="col-12">
+        <label class="form-label fs-1">Book an Appointment 🐾</label>
+    </div>
+</div>
+
+<form method="post">
+    <div class="text-danger" asp-validation-summary="All"></div>
+
+    <!-- Pet dropdown -->
+    <div class="row my-2">
+        <div class="col-4">
+            <label asp-for="NewAppointment.PetID" class="form-label">Pet</label>
+        </div>
+        <div class="col-12">
+            <select asp-for="NewAppointment.PetID" asp-items="Model.PetOptions" class="form-control">
+                <option value="">-- Select Your Pet --</option>
+            </select>
+            <span asp-validation-for="NewAppointment.PetID" class="text-danger"></span>
+        </div>
+    </div>
+
+    <!-- Date/time -->
+    <!-- Date -->
+    <div class="row my-2">
+        <div class="col-4">
+            <label asp-for="AppointmentDate" class="form-label">Appointment Date</label>
+        </div>
+        <div class="col-12">
+            <input asp-for="AppointmentDate" type="date" class="form-control" />
+            <span asp-validation-for="AppointmentDate" class="text-danger"></span>
+        </div>
+    </div>
+
+    <!-- Time (hour + minute only) -->
+    <div class="row my-2">
+        <div class="col-4">
+            <label asp-for="AppointmentTime" class="form-label">Appointment Time</label>
+        </div>
+        <div class="col-12">
+            <input asp-for="AppointmentTime" type="time" step="60" class="form-control" />
+            <span asp-validation-for="AppointmentTime" class="text-danger"></span>
+        </div>
+    </div>
+
+
+
+    <!-- Reason -->
+    <div class="row my-2">
+        <div class="col-4">
+            <label asp-for="NewAppointment.Reason" class="form-label">Reason</label>
+        </div>
+        <div class="col-12">
+            <textarea asp-for="NewAppointment.Reason" class="form-control" rows="3"></textarea>
+            <span asp-validation-for="NewAppointment.Reason" class="text-danger"></span>
+        </div>
+    </div>
+
+    <!-- Status -->
+    <div class="row my-2">
+        <div class="col-4">
+            <label asp-for="NewAppointment.Status" class="form-label">Status</label>
+        </div>
+        <div class="col-12">
+            <select asp-for="NewAppointment.Status" class="form-control">
+                <option value="Scheduled">Scheduled</option>
+                <option value="Completed">Completed</option>
+                <option value="Canceled">Canceled</option>
+            </select>
+            <span asp-validation-for="NewAppointment.Status" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row my-2">
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary form-control">Save Appointment</button>
+        </div>
+    </div>
+</form>

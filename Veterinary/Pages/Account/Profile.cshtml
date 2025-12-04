@@ -1,0 +1,58 @@
+﻿@page
+@model Veterinary.Pages.Account.ProfileModel
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<!-- Page Header -->
+<div class="row text-center">
+    <div class="col-12">
+        <label class="form-label fs-1">Profile</label>
+    </div>
+</div>
+
+<!-- Owner Info -->
+<div class="row my-2">
+    <div class="col-2">
+        <label class="form-label fw-bold">Owner ID:</label>
+    </div>
+    <div class="col-10">
+        <label class="form-label">@Model.OwnerProfile.OwnerID</label>
+    </div>
+</div>
+
+<div class="row my-2">
+    <div class="col-2">
+        <label class="form-label fw-bold">First Name:</label>
+    </div>
+    <div class="col-10">
+        <label class="form-label">@Model.OwnerProfile.FirstName</label>
+    </div>
+</div>
+
+<div class="row my-2">
+    <div class="col-2">
+        <label class="form-label fw-bold">Last Name:</label>
+    </div>
+    <div class="col-10">
+        <label class="form-label">@Model.OwnerProfile.LastName</label>
+    </div>
+</div>
+
+<div class="row my-2">
+    <div class="col-2">
+        <label class="form-label fw-bold">Phone Number:</label>
+    </div>
+    <div class="col-10">
+        <label class="form-label">@Model.OwnerProfile.PhoneNumber</label>
+    </div>
+</div>
+
+<div class="row my-2">
+    <div class="col-2">
+        <label class="form-label fw-bold">Username:</label>
+    </div>
+    <div class="col-10">
+        <label class="form-label">@Model.OwnerProfile.Username</label>
+    </div>
+</div>

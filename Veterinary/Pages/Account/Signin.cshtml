@@ -1,0 +1,54 @@
+﻿@page
+@model Veterinary.Pages.Account.SigninModel
+@{
+}
+
+<div class="row text-center">
+    <div class="col-12">
+        <label class="form-label fs-1">Sign In</label>
+    </div>
+</div>
+
+<form method="post">
+    <!-- Summary of model errors -->
+    <div class="text-danger" asp-validation-summary="All"></div>
+    <!-- Username -->
+    <div class="row my-2">
+        <div class="col-4">
+            <label asp-for="LoginUser.Username" class="form-label"></label>
+        </div>
+        <div class="col-12">
+            <input asp-for="LoginUser.Username" type="text" class="form-control" />
+            <span asp-validation-for="LoginUser.Username" class="text-danger"></span>
+        </div>
+    </div>
+
+    <!-- Password -->
+    <div class="row my-2">
+        <div class="col-4">
+            <label asp-for="LoginUser.Password" class="form-label"></label>
+        </div>
+        <div class="col-12">
+            <input asp-for="LoginUser.Password" type="password" class="form-control" />
+            <span asp-validation-for="LoginUser.Password" class="text-danger"></span>
+        </div>
+    </div>
+
+    <!-- (Optional) Remember Me -->
+    @* Uncomment if you decide to use RememberMe in your LoginView *@
+    @* <div class="row my-2">
+        <div class="col-4">
+            <label asp-for="LoginUser.RememberMe" class="form-label">Remember me</label>
+        </div>
+        <div class="col-12">
+            <input asp-for="LoginUser.RememberMe" type="checkbox" class="form-check-input" />
+        </div>
+    </div> *@
+
+    <!-- Submit -->
+    <div class="row my-2">
+        <div class="col-12">
+            <button type="submit" class="form-control btn btn-primary">Sign In</button>
+        </div>
+    </div>
+</form>

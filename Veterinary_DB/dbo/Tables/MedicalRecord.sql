@@ -21,6 +21,9 @@ GO
 
 ALTER TABLE [dbo].[MedicalRecord] CHECK CONSTRAINT [FK_MedicalRecord_Appointment]
 GO
+
+
+GO
 ALTER TABLE [dbo].[MedicalRecord]  WITH CHECK ADD  CONSTRAINT [FK_MedicalRecord_Pet] FOREIGN KEY([PetID])
 REFERENCES [dbo].[Pet] ([PetID])
 ON UPDATE CASCADE
@@ -29,6 +32,9 @@ GO
 
 ALTER TABLE [dbo].[MedicalRecord] CHECK CONSTRAINT [FK_MedicalRecord_Pet]
 GO
+
+
+GO
 ALTER TABLE [dbo].[MedicalRecord]  WITH CHECK ADD  CONSTRAINT [FK_MedicalRecord_VeterinarianAdmin] FOREIGN KEY([VetID])
 REFERENCES [dbo].[VeterinarianAdmin] ([VetID])
 ON UPDATE CASCADE
@@ -36,3 +42,5 @@ ON DELETE CASCADE
 GO
 
 ALTER TABLE [dbo].[MedicalRecord] CHECK CONSTRAINT [FK_MedicalRecord_VeterinarianAdmin]
+GO
+

@@ -1,0 +1,89 @@
+﻿@page
+@model Veterinary.Pages.Account.RegisterModel
+@{
+}
+
+<div class="row text-center">
+    <div class="col-12">
+        <label class="form-label fs-1">Register</label>
+    </div>
+</div>
+
+<form method="post">
+
+    <!-- Firstname -->
+    <div class="row my-2">
+        <div class="col-4">
+            <label asp-for="NewUser.Firstname" class="form-label fw-bold"></label>
+        </div>
+        <div class="col-12">
+            <input asp-for="NewUser.Firstname" type="text" class="form-control" />
+            <span asp-validation-for="NewUser.Firstname" class="text-danger"></span>
+        </div>
+    </div>
+
+    <!-- Lastname -->
+    <div class="row my-2">
+        <div class="col-4">
+            <label asp-for="NewUser.Lastname" class="form-label fw-bold"></label>
+        </div>
+        <div class="col-12">
+            <input asp-for="NewUser.Lastname" type="text" class="form-control" />
+            <span asp-validation-for="NewUser.Lastname" class="text-danger"></span>
+        </div>
+    </div>
+
+    <!-- Username -->
+    <div class="row my-2">
+        <div class="col-4">
+            <label asp-for="NewUser.Username" class="form-label fw-bold">Username:</label>
+        </div>
+        <div class="col-12">
+            <input asp-for="NewUser.Username" type="text" class="form-control" />
+            <span asp-validation-for="NewUser.Username" class="text-danger"></span>
+        </div>
+    </div>
+
+    <!-- Password -->
+    <div class="row my-2">
+        <div class="col-4">
+            <label asp-for="NewUser.Password" class="form-label fw-bold">Password:</label>
+        </div>
+        <div class="col-12">
+            <input asp-for="NewUser.Password" type="password" class="form-control" />
+            <span asp-validation-for="NewUser.Password" class="text-danger"></span>
+        </div>
+    </div>
+
+    <!-- Confirm Password -->
+    <div class="row my-2">
+        <div class="col-4">
+            <label asp-for="NewUser.ConfirmPassword" class="form-label fw-bold">Confirm Password:</label>
+        </div>
+        <div class="col-12">
+            <input asp-for="NewUser.ConfirmPassword" type="password" class="form-control" />
+            <span asp-validation-for="NewUser.ConfirmPassword" class="text-danger"></span>
+        </div>
+    </div>
+
+    <!-- Role -->
+    <div class="row my-2">
+        <div class="col-4">
+            <label asp-for="NewUser.Role" class="form-label fw-bold">Role:</label>
+        </div>
+        <div class="col-12">
+            <select asp-for="NewUser.Role" class="form-control">
+                <option value="Owner">Owner</option>
+                <option value="Vet">Vet</option>
+            </select>
+            <span asp-validation-for="NewUser.Role" class="text-danger"></span>
+        </div>
+    </div>
+
+    <!-- Submit -->
+    <div class="row my-2">
+        <div class="col-12">
+            <button type="submit" class="form-control btn btn-primary">Register</button>
+        </div>
+    </div>
+</form>

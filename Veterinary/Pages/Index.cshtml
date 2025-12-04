@@ -1,10 +1,83 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Welcome to Your Vet Clinic Site";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<!-- Background Section -->
+<div class="home-background">
+    <div class="overlay">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-8">
+                    <h1 class="display-4 font-weight-bold">Welcome to HappyTails! 🐶</h1>
+                    <p class="lead mb-4">Taking care of pets made easy. Book visits, make your self at home, and stay chill.</p>
+
+                    <!-- change link when your pet pages exist -->
+                    <a class="btn btn-primary btn-lg" href="/Pets/PetList">View Your Pets</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<!-- Featured Pet Care Selections Section (copied style from Pet cards) -->
+<section class="Pet-selections py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5">Our Main Pet Services</h2>
+        <div class="row">
+
+            <!-- Service Card 1 -->
+            <div class="col-md-4">
+                <div class="card">
+                    <!-- replace this image later -->
+                    @* <img src="~/images/checkup.jpg" class="card-img-top" alt="Pet Checkup"> *@
+                    <img src="~/images/favicon.png" class="card-img-top" alt="Checkup Placeholder">
+                    <div class="card-body">
+                        <h5 class="card-title">Annual Checkup</h5>
+                        <p class="card-text">Keep your pet healthy with quick checkups and vibes.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service Card 2 -->
+            <div class="col-md-4">
+                <div class="card">
+                    <!-- replace this image later -->
+                    <img src="~/images/favicon.png" class="card-img-top" alt="Vaccination Placeholder">
+                    <div class="card-body">
+                        <h5 class="card-title">Vaccinations</h5>
+                        <p class="card-text">Shots for pets, snacks for happiness. Win win.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service Card 3 -->
+            <div class="col-md-4">
+                <div class="card">
+                    <!-- replace this image later -->
+                    <img src="~/images/favicon.png" class="card-img-top" alt="Medical Records Placeholder">
+                    <div class="card-body">
+                        <h5 class="card-title">Medical Records</h5>
+                        <p class="card-text">Diagnosis, treatment, prescriptions, all in one spot.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- About Us Section -->
+<section class="about-us py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">About Us</h2>
+        <p class="text-center">
+            At HappyTails Vet Care 🐾 we believe pets are family, and family deserves top-tier care and belly rubs.
+            Our awesome vets and staff are passionate about keeping tails wagging, fur soft, and moods happy.
+            Whether it’s checkups, vaccines, treatments, or mysterious rashes — we’ve got your little buddy covered.
+            Come join the HappyTails pack and let us help your pet live their best life 🐶💙
+        </p>
+    </div>
+</section>
+

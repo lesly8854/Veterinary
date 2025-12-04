@@ -1,0 +1,108 @@
+﻿@page "{id:int}"
+@model Veterinary.Pages.Pet.EditPetModel
+@{
+    ViewData["Title"] = "Edit Pet";
+}
+
+<div class="row text-center">
+    <div class="col-12">
+        <label class="form-label fs-1">Edit Pet</label>
+    </div>
+</div>
+
+<form method="post">
+    <div class="text-danger" asp-validation-summary="All"></div>
+
+    <input type="hidden" asp-for="EditPet.PetID" />
+
+    <input type="hidden" asp-for="EditPet.PetID" />
+
+    <div class="row my-2">
+        <div class="col-4">
+            <label asp-for="EditPet.OwnerID" class="form-label"></label>
+        </div>
+        <div class="col-12">
+            <!-- visible but not editable -->
+            <input asp-for="EditPet.OwnerID" class="form-control" readonly />
+            <span asp-validation-for="EditPet.OwnerID" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row my-2">
+        <div class="col-4">
+            <label asp-for="EditPet.OwnerName" class="form-label"></label>
+        </div>
+        <div class="col-12">
+            <!-- also visible but not editable -->
+            <input asp-for="EditPet.OwnerName" class="form-control" readonly />
+            <span asp-validation-for="EditPet.OwnerName" class="text-danger"></span>
+        </div>
+    </div>
+
+
+    <div class="row my-2">
+        <div class="col-4">
+            <label asp-for="EditPet.Name" class="form-label"></label>
+        </div>
+        <div class="col-12">
+            <input asp-for="EditPet.Name" class="form-control" />
+            <span asp-validation-for="EditPet.Name" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row my-2">
+        <div class="col-4">
+            <label asp-for="EditPet.Species" class="form-label"></label>
+        </div>
+        <div class="col-12">
+            <input asp-for="EditPet.Species" class="form-control" />
+            <span asp-validation-for="EditPet.Species" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row my-2">
+        <div class="col-4">
+            <label asp-for="EditPet.Breed" class="form-label"></label>
+        </div>
+        <div class="col-12">
+            <input asp-for="EditPet.Breed" class="form-control" />
+            <span asp-validation-for="EditPet.Breed" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row my-2">
+        <div class="col-4">
+            <label asp-for="EditPet.Gender" class="form-label"></label>
+        </div>
+        <div class="col-12">
+            <input asp-for="EditPet.Gender" class="form-control" />
+            <span asp-validation-for="EditPet.Gender" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row my-2">
+        <div class="col-4">
+            <label asp-for="EditPet.DateOfBirth" class="form-label"></label>
+        </div>
+        <div class="col-12">
+            <input asp-for="EditPet.DateOfBirth" type="date" class="form-control" />
+            <span asp-validation-for="EditPet.DateOfBirth" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row my-2">
+        <div class="col-4">
+            <label asp-for="EditPet.Weight" class="form-label"></label>
+        </div>
+        <div class="col-12">
+            <input asp-for="EditPet.Weight" class="form-control" />
+            <span asp-validation-for="EditPet.Weight" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row my-2">
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary form-control">Save Changes</button>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,37 @@
+﻿@page "{id:int}"
+@model Veterinary.Pages.Pet.EditBillingModel
+@{
+    ViewData["Title"] = "Edit Billing";
+}
+
+<div class="row text-center">
+    <div class="col-12">
+        <label class="form-label fs-1">Edit Billing 🧾🐾</label>
+    </div>
+</div>
+
+<form method="post">
+    <div class="text-danger" asp-validation-summary="All"></div>
+
+    <input type="hidden" asp-for="EditBilling.BillingID" />
+
+    <div class="row my-2">
+        <div class="col-4">
+            <label asp-for="EditBilling.PaymentStatus" class="form-label">Payment Status:</label>
+        </div>
+        <div class="col-12">
+            <select asp-for="EditBilling.PaymentStatus" class="form-control">
+                <option value="Paid">✅ Paid</option>
+                <option value="Pending">⏳ Pending</option>
+                <option value="Overdue">🚨 Overdue</option>
+            </select>
+            <span asp-validation-for="EditBilling.PaymentStatus" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row my-2">
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary form-control">Save</button>
+        </div>
+    </div>
+</form>

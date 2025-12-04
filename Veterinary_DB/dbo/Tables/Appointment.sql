@@ -18,6 +18,9 @@ GO
 
 ALTER TABLE [dbo].[Appointment] CHECK CONSTRAINT [FK_Appointment_Pet]
 GO
+
+
+GO
 ALTER TABLE [dbo].[Appointment]  WITH CHECK ADD  CONSTRAINT [FK_Appointment_PetOwner] FOREIGN KEY([OwnerID])
 REFERENCES [dbo].[PetOwner] ([OwnerID])
 ON UPDATE CASCADE
@@ -26,6 +29,9 @@ GO
 
 ALTER TABLE [dbo].[Appointment] CHECK CONSTRAINT [FK_Appointment_PetOwner]
 GO
+
+
+GO
 ALTER TABLE [dbo].[Appointment]  WITH CHECK ADD  CONSTRAINT [FK_Appointment_VeterinarianAdmin] FOREIGN KEY([VetID])
 REFERENCES [dbo].[VeterinarianAdmin] ([VetID])
 ON UPDATE CASCADE
@@ -33,3 +39,5 @@ ON DELETE CASCADE
 GO
 
 ALTER TABLE [dbo].[Appointment] CHECK CONSTRAINT [FK_Appointment_VeterinarianAdmin]
+GO
+

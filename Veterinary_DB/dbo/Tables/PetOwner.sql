@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[PetOwner](
-	[OwnerID] [int] NOT NULL,
-	[FirstName] [nvarchar](100) NOT NULL,
-	[LastName] [nvarchar](100) NOT NULL,
+	[OwnerID] [int] IDENTITY(1,1) NOT NULL,
+	[FirstName] [nvarchar](100) NULL,
+	[LastName] [nvarchar](100) NULL,
 	[PhoneNumber] [nvarchar](20) NULL,
 	[Username] [nvarchar](50) NOT NULL,
 	[Password] [nvarchar](100) NOT NULL,

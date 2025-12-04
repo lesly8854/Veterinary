@@ -1,0 +1,59 @@
+﻿@page
+@model Veterinary.Pages.Pet.BillingModel
+@{
+    ViewData["Title"] = "Billing";
+}
+
+<div class="row text-center">
+    <div class="col-12">
+        <label class="form-label fs-1">Billing 💸🐾</label>
+    </div>
+</div>
+
+<form method="post">
+    <div class="text-danger fw-bold" asp-validation-summary="All"></div>
+
+    <div class="row my-2">
+        <div class="col-4">
+            <label asp-for="NewBilling.AppointmentID" class="form-label">Appointment ID:</label>
+        </div>
+        <div class="col-12">
+            <input asp-for="NewBilling.AppointmentID" class="form-control" />
+            <span asp-validation-for="NewBilling.AppointmentID" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row my-2">
+        <div class="col-4">
+            <label asp-for="NewBilling.OwnerID" class="form-label">Owner ID:</label>
+        </div>
+        <div class="col-12">
+            <input asp-for="NewBilling.OwnerID" class="form-control" />
+            <span asp-validation-for="NewBilling.OwnerID" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row my-2">
+        <div class="col-4">
+            <label asp-for="NewBilling.PaymentStatus" class="form-label">Payment Status:</label>
+        </div>
+        <div class="col-12">
+            <select asp-for="NewBilling.PaymentStatus" class="form-control">
+                <option value="Paid">✅ Paid</option>
+                <option value="Pending">⏳ Pending</option>
+                <option value="Overdue">🚨 Overdue</option>
+            </select>
+            <span asp-validation-for="NewBilling.PaymentStatus" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row my-2">
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary form-control">Issue Bill</button>
+        </div>
+    </div>
+</form>
+
+<div class="text-center mt-3">
+    <a class="btn btn-success" asp-area="" asp-page="/Pet/BillingList">View Bills</a>
+</div>

@@ -1,62 +1,98 @@
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Data.SqlClient;
-//using Microsoft.Data.SqlClient;
 using System.Security.Claims;
-using Veterinary.Model;
 using Veterinary_Business;
 
 namespace Veterinary.Pages.Account
 {
-    [Authorize]
     public class ProfileModel : PageModel
     {
-        [BindProperty]
-        public PetOwnerView OwnerProfile { get; set; } = new PetOwnerView();
+        public UserProfileView Profile { get; set; }
+        public string Role { get; set; }
+        public string IdLabel { get; set; }
 
         public void OnGet()
         {
-            // honestly just grabbing the logged-in username from claims
-            string username = User.FindFirst(ClaimTypes.Name)?.Value;
+            Role = User.FindFirstValue(ClaimTypes.Role);
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            // loading the profile from DB
-            LoadOwnerProfile(username);
-        }
-
-        private void LoadOwnerProfile(string? username)
-        {
-            if (username == null)
-            {
-                // lol something went wrong, just dip
-                return;
-            }
+            Profile = new UserProfileView();
 
             using (SqlConnection conn = new SqlConnection(AppHelper.GetDBConnectionString()))
             {
-                // selecting owner info, matches columns I actually have
-                string query = "SELECT OwnerID, FirstName, LastName, PhoneNumber, Username, Password " +
-                               "FROM PetOwner WHERE Username = @username";
-
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@username", username);
-
                 conn.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
 
-                if (reader.HasRows)
+                // -----------------------------
+                // OWNER
+                // -----------------------------
+                if (Role == "Owner")
                 {
-                    reader.Read();
+                    IdLabel = "Owner ID";
 
-                    // mapping DB -> model properties
-                    OwnerProfile.OwnerID = reader.GetInt32(0);
-                    OwnerProfile.FirstName = reader.GetString(1);
-                    OwnerProfile.LastName = reader.GetString(2);
-                    OwnerProfile.PhoneNumber = reader.IsDBNull(3) ? null : reader.GetString(3);
-                    OwnerProfile.Username = reader.GetString(4);
-                    OwnerProfile.Password = reader.GetString(5);
+                    string cmdText = @"SELECT OwnerID, Firstname, Lastname, PhoneNumber, Username
+                                       FROM PetOwner
+                                       WHERE OwnerID = @id";
+
+                    using (SqlCommand cmd = new SqlCommand(cmdText, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@id", userId);
+
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                Profile.Id = reader.GetInt32(0);
+                                Profile.FirstName = reader.GetString(1);
+                                Profile.LastName = reader.GetString(2);
+                                Profile.PhoneNumber = reader.GetString(3);
+                                Profile.Username = reader.GetString(4);
+                            }
+                        }
+                    }
+                }
+                // -----------------------------
+                // VET
+                // -----------------------------
+                else if (Role == "Vet")
+                {
+                    IdLabel = "Vet ID";
+
+                    string cmdText = @"SELECT VetID, AdminName, AdminPhoneNumber, AdminUsername
+                                       FROM VeterinarianAdmin
+                                       WHERE VetID = @id";
+
+                    using (SqlCommand cmd = new SqlCommand(cmdText, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@id", userId);
+
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                Profile.Id = reader.GetInt32(0);
+
+                                string fullName = reader.GetString(1);
+                                // optional split
+                                var parts = fullName.Split(' ');
+                                Profile.FirstName = parts.Length > 0 ? parts[0] : "";
+                                Profile.LastName = parts.Length > 1 ? parts[1] : "";
+
+                                Profile.PhoneNumber = reader.IsDBNull(2) ? "" : reader.GetString(2);
+                                Profile.Username = reader.GetString(3);
+                            }
+                        }
+                    }
                 }
             }
+        }
+
+        public class UserProfileView
+        {
+            public int Id { get; set; }
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+            public string PhoneNumber { get; set; }
+            public string Username { get; set; }
         }
     }
 }

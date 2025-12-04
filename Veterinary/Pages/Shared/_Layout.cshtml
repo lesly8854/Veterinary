@@ -22,7 +22,6 @@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center gap-2" asp-area="" asp-page="/Index">
-                   
                     Veterinary
                 </a>
 
@@ -41,19 +40,30 @@
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/Pet/AppointmentList">Appointment</a>
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Appointments/AppointmentList">Appointments</a>
                             </li>
+
                             <!-- renamed from MenuItems to Pets -->
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/Pet/PetList">Pets</a>
-                            </li>
+                            @if (User.IsInRole("Owner"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Pet/PetList">Pets</a>
+                                </li>
+                            }
+
+                            <!-- Vet-only Medical Records section -->
+                            @if (User.IsInRole("Vet"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/MedicalRecords/MedicalRecordList">
+                                        Medical Records
+                                    </a>
+                                </li>
+                            }
 
                             <!-- renamed from Ingredients to Records -->
                             @if (User.IsInRole("Admin"))
                             {
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-page="/Records/RecordList">Records</a>
-                                </li>
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-page="/ManageAccounts">Manage Accounts</a>
                                 </li>

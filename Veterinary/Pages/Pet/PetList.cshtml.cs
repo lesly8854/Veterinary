@@ -4,9 +4,11 @@ using Veterinary.Model;
 using Veterinary_Business;
 using System.Security.Claims;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Veterinary.Pages.Pet
 {
+    [Authorize(Roles = "Owner")]
     public class PetListModel : PageModel
     {
         public List<PetView> Pets { get; set; } = new List<PetView>();

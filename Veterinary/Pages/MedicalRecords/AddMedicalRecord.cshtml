@@ -1,0 +1,102 @@
+﻿@page
+@model Veterinary.Pages.MedicalRecords.AddMedicalRecordModel
+
+@{
+    ViewData["Title"] = "Add Medical Record";
+}
+
+<div class="row text-center mb-3">
+    <div class="col-12">
+        <label class="form-label fs-1">Add Medical Record</label>
+    </div>
+</div>
+
+<div class="container">
+    <form method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+        <!-- Appointment selection -->
+        <div class="row mb-3">
+            <div class="col-3">
+                <label asp-for="SelectedAppointmentID" class="form-label fw-bold">Appointment:</label>
+            </div>
+            <div class="col-9">
+                <select asp-for="SelectedAppointmentID"
+                        asp-items="Model.AppointmentOptions"
+                        class="form-control">
+                    <option value="">-- Select an appointment --</option>
+                </select>
+                <span asp-validation-for="SelectedAppointmentID" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- Diagnosis -->
+        <div class="row mb-3">
+            <div class="col-3">
+                <label asp-for="Diagnosis" class="form-label fw-bold">Diagnosis:</label>
+            </div>
+            <div class="col-9">
+                <input asp-for="Diagnosis" class="form-control" />
+                <span asp-validation-for="Diagnosis" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- Treatment -->
+        <div class="row mb-3">
+            <div class="col-3">
+                <label asp-for="Treatment" class="form-label fw-bold">Treatment:</label>
+            </div>
+            <div class="col-9">
+                <input asp-for="Treatment" class="form-control" />
+                <span asp-validation-for="Treatment" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- Prescription -->
+        <div class="row mb-3">
+            <div class="col-3">
+                <label asp-for="Prescription" class="form-label fw-bold">Prescription:</label>
+            </div>
+            <div class="col-9">
+                <input asp-for="Prescription" class="form-control" />
+                <span asp-validation-for="Prescription" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- Vaccination -->
+        <div class="row mb-3">
+            <div class="col-3">
+                <label asp-for="Vaccination" class="form-label fw-bold">Vaccination:</label>
+            </div>
+            <div class="col-9">
+                <input asp-for="Vaccination" class="form-control" />
+                <span asp-validation-for="Vaccination" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- Notes -->
+        <div class="row mb-4">
+            <div class="col-3">
+                <label asp-for="Notes" class="form-label fw-bold">Notes:</label>
+            </div>
+            <div class="col-9">
+                <textarea asp-for="Notes" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="Notes" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="row">
+            <div class="col-6">
+                <a asp-page="/MedicalRecords/MedicalRecordList" class="btn btn-secondary w-100">Cancel</a>
+            </div>
+            <div class="col-6">
+                <button type="submit" class="btn btn-primary w-100">Save Record</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

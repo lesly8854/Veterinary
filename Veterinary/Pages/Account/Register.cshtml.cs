@@ -34,19 +34,44 @@ namespace Veterinary.Pages.Account
 
             using (SqlConnection conn = new SqlConnection(AppHelper.GetDBConnectionString()))
             {
-                string cmdText = "INSERT INTO PetOwner (Firstname, Lastname, Username, Password, PhoneNumber) " +
-                                 "VALUES (@Firstname, @Lastname, @Username, @Password, @PhoneNumber)";
-
-                SqlCommand cmd = new SqlCommand(cmdText, conn);
-
-                cmd.Parameters.AddWithValue("@Firstname", NewUser.Firstname);
-                cmd.Parameters.AddWithValue("@Lastname", NewUser.Lastname);
-
-                cmd.Parameters.AddWithValue("@Username", NewUser.Username);
-                cmd.Parameters.AddWithValue("@Password", AppHelper.GeneratePasswordHash(NewUser.Password));
-                cmd.Parameters.AddWithValue("@PhoneNumber", "N/A"); // adjust later if you add this to the form
-
                 conn.Open();
+
+                SqlCommand cmd;
+
+                // Decide which table to insert into based on Role
+                if (NewUser.Role == "Vet")
+                {
+                    // ?? Insert into Vet table (VeterinarianAdmin)
+                    string cmdText = @"
+                        INSERT INTO VeterinarianAdmin (AdminName, AdminPhoneNumber, AdminUsername, AdminPassword)
+                        VALUES (@AdminName, @AdminPhoneNumber, @AdminUsername, @AdminPassword);";
+
+                    cmd = new SqlCommand(cmdText, conn);
+
+                    // Build full name for AdminName
+                    string fullName = $"{NewUser.Firstname} {NewUser.Lastname}";
+
+                    cmd.Parameters.AddWithValue("@AdminName", fullName);
+                    cmd.Parameters.AddWithValue("@AdminPhoneNumber", "N/A"); // or "" if you prefer
+                    cmd.Parameters.AddWithValue("@AdminUsername", NewUser.Username);
+                    cmd.Parameters.AddWithValue("@AdminPassword", AppHelper.GeneratePasswordHash(NewUser.Password));
+                }
+                else
+                {
+                    // ?? Default to Owner ? PetOwner table
+                    string cmdText = @"
+                        INSERT INTO PetOwner (Firstname, Lastname, Username, Password, PhoneNumber)
+                        VALUES (@Firstname, @Lastname, @Username, @Password, @PhoneNumber);";
+
+                    cmd = new SqlCommand(cmdText, conn);
+
+                    cmd.Parameters.AddWithValue("@Firstname", NewUser.Firstname);
+                    cmd.Parameters.AddWithValue("@Lastname", NewUser.Lastname);
+                    cmd.Parameters.AddWithValue("@Username", NewUser.Username);
+                    cmd.Parameters.AddWithValue("@Password", AppHelper.GeneratePasswordHash(NewUser.Password));
+                    cmd.Parameters.AddWithValue("@PhoneNumber", "N/A"); // adjust later if you add this to the form
+                }
+
                 cmd.ExecuteNonQuery();
             }
 

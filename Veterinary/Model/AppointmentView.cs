@@ -13,7 +13,9 @@ namespace Veterinary.Model
         [Required]
         public int OwnerID { get; set; }  // FK
 
-        public int? VetID { get; set; }  // FK
+        // now we REQUIRE choosing a vet
+        [Required]
+        public int VetID { get; set; }   // FK to VeterinarianAdmin
 
         [Required]
         [DataType(DataType.DateTime)]
@@ -21,16 +23,15 @@ namespace Veterinary.Model
 
         [Required]
         [StringLength(100)]
-        public string Reason { get; set; }
+        public string Reason { get; set; } = string.Empty;
 
         [Required]
         [StringLength(20)]
-        public string Status { get; set; }  // e.g. "Scheduled", "Completed"
+        public string Status { get; set; } = "Scheduled";
 
-        // UI helpers
+        // UI helpers – optional
         public string? PetName { get; set; }
         public string? OwnerName { get; set; }
         public string? VetName { get; set; }
-
     }
 }

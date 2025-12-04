@@ -1,0 +1,121 @@
+﻿@page
+@model Veterinary.Pages.Appointments.AppointmentListModel
+@using System.Security.Claims
+
+@{
+    ViewData["Title"] = "Appointments";
+    var role = User.FindFirst(ClaimTypes.Role)?.Value;
+}
+
+@* ---------------- OWNER VIEW (unchanged layout, plus Cancel button) ---------------- *@
+@if (role == "Owner")
+{
+    <div class="row mb-3">
+        <div class="col-8 text-start">
+            <h2>My Appointments 🐾</h2>
+        </div>
+        <div class="col-4 text-end">
+            <a asp-page="/Appointments/AddAppointment" class="btn btn-success">
+                + Add Appointment
+            </a>
+        </div>
+    </div>
+
+    @if (Model.Appointments == null || !Model.Appointments.Any())
+    {
+        <div class="alert alert-info">
+            You don't have any appointments yet. Click <strong>Add Appointment</strong> to book one!
+        </div>
+    }
+    else
+    {
+        <div class="row row-cols-1 row-cols-md-2 g-3">
+            @foreach (var appt in Model.Appointments)
+            {
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">@appt.PetName</h5>
+                            <p class="card-text mb-1">
+                                <strong>Assigned Vet:</strong> @appt.VetName
+                            </p>
+                            <p class="card-text mb-1">
+                                <strong>Date:</strong> @appt.Date.ToString("g")
+                            </p>
+                            <p class="card-text mb-1">
+                                <strong>Reason:</strong> @appt.Reason
+                            </p>
+                            <p class="card-text">
+                                <strong>Status:</strong> @appt.Status
+                            </p>
+
+                            <!-- Cancel / Unassign button -->
+                            <div class="d-flex justify-content-end mt-2">
+                                <form method="post"
+                                      asp-page-handler="Cancel"
+                                      asp-route-id="@appt.AppointmentID"
+                                      onsubmit="return confirm('Cancel this appointment and unassign the vet?');">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger">
+                                        Cancel / Unassign
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+}
+@* ---------------- VET VIEW (assigned appointments) ---------------- *@
+else if (role == "Vet")
+{
+    <div class="row mb-3">
+        <div class="col-12 text-start">
+            <h2>Assigned Appointments 🩺🐶</h2>
+        </div>
+    </div>
+
+    @if (Model.Appointments == null || !Model.Appointments.Any())
+    {
+        <div class="alert alert-info">
+            No appointments have been assigned to you yet.
+        </div>
+    }
+    else
+    {
+        <table class="table table-striped table-bordered">
+            <thead class="table-light">
+                <tr>
+                    <th>Appointment ID</th>
+                    <th>Pet Name</th>
+                    <th>Owner Username</th>
+                    <th>Date</th>
+                    <th>Reason</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var appt in Model.Appointments)
+                {
+                    <tr>
+                        <td>@appt.AppointmentID</td>
+                        <td>@appt.PetName</td>
+                        <td>@appt.OwnerName</td>
+                        <td>@appt.Date.ToString("g")</td>
+                        <td>@appt.Reason</td>
+                        <td>@appt.Status</td>
+                        <td>
+                            <a asp-page="/Appointments/EditAppointment"
+                               asp-route-id="@appt.AppointmentID"
+                               class="btn btn-sm btn-primary">
+                                Edit
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}

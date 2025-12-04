@@ -5,9 +5,11 @@ using Veterinary.Model;
 using Veterinary_Business;
 using System;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Veterinary.Pages.Pet
 {
+    [Authorize(Roles = "Owner")]
     public class AddPetModel : PageModel
     {
         [BindProperty]

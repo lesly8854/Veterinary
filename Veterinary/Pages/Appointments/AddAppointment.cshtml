@@ -1,5 +1,5 @@
 ﻿@page
-@model Veterinary.Pages.Pet.AddAppointmentModel
+@model Veterinary.Pages.Appointments.AddAppointmentModel
 @{
     ViewData["Title"] = "Add Appointment";
 }
@@ -25,6 +25,17 @@
             <span asp-validation-for="NewAppointment.PetID" class="text-danger"></span>
         </div>
     </div>
+
+    <div class="row my-2">
+        <div class="col-4">
+            <label class="form-label fw-bold">Choose Vet:</label>
+        </div>
+        <div class="col-12">
+            <select asp-for="SelectedVetID" asp-items="Model.VetOptions" class="form-control"></select>
+            <span asp-validation-for="SelectedVetID" class="text-danger"></span>
+        </div>
+    </div>
+
 
     <!-- Date/time -->
     <!-- Date -->
@@ -70,8 +81,6 @@
         <div class="col-12">
             <select asp-for="NewAppointment.Status" class="form-control">
                 <option value="Scheduled">Scheduled</option>
-                <option value="Completed">Completed</option>
-                <option value="Canceled">Canceled</option>
             </select>
             <span asp-validation-for="NewAppointment.Status" class="text-danger"></span>
         </div>

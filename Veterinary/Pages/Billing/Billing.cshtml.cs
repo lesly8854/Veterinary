@@ -4,7 +4,7 @@ using Microsoft.Data.SqlClient;
 using Veterinary.Model;
 using System;
 
-namespace Veterinary.Pages.Pet
+namespace Veterinary.Pages.Billing
 {
     public class BillingModel : PageModel
     {
